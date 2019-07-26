@@ -48,7 +48,7 @@ public @Data class Utilisateur implements Serializable {
 	private List<Type> typeList;
 
 	@ManyToOne
-	@JoinColumn(name = "profilID")
+	@JoinColumn(name = "profileID")
 	private Profile profile;
 
 
