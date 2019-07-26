@@ -1,10 +1,8 @@
 package com.minpostel.mvc.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 
 @Entity
@@ -15,7 +13,10 @@ public class Departement implements Serializable {
 	@GeneratedValue
 	private Long dptID;
 
-	private String no;
+	private String nom;
+
+	@OneToMany(mappedBy = "departement")
+	private List<ArchivePapier> archivePapierList;
 
 	public Long getDptID() {
 		return dptID;
@@ -25,11 +26,23 @@ public class Departement implements Serializable {
 		this.dptID = dptID;
 	}
 
-	public String getNo() {
-		return no;
+	public String getNom() {
+		return nom;
 	}
 
 	public void setNo(String no) {
-		this.no = no;
+		this.nom = nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public List<ArchivePapier> getArchivePapierList() {
+		return archivePapierList;
+	}
+
+	public void setArchivePapierList(List<ArchivePapier> archivePapierList) {
+		this.archivePapierList = archivePapierList;
 	}
 }

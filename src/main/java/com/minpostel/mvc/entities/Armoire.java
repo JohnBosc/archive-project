@@ -1,10 +1,7 @@
 package com.minpostel.mvc.entities;
 import java.util.*;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "armoire")
@@ -12,19 +9,26 @@ public class Armoire implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long armID;
+	private Long armoireID;
 
 	private Date dateCreation;
 	private String description;
 	private String nom;
 	private String photo;
 
-	public Long getArmID() {
-		return armID;
+	@OneToMany(mappedBy = "armoire")
+	private List<Boite> boiteList;
+
+	@ManyToOne
+	@JoinColumn(name = "utilisateurID")
+	private Utilisateur utilisateur;
+
+	public Long getArmoireID() {
+		return armoireID;
 	}
 
 	public void setArmID(Long armID) {
-		this.armID = armID;
+		this.armoireID = armoireID;
 	}
 
 	public Date getDateCreation() {
@@ -53,6 +57,26 @@ public class Armoire implements Serializable {
 
 	public String getPhoto() {
 		return photo;
+	}
+
+	public void setArmoireID(Long armoireID) {
+		this.armoireID = armoireID;
+	}
+
+	public List<Boite> getBoiteList() {
+		return boiteList;
+	}
+
+	public void setBoiteList(List<Boite> boiteList) {
+		this.boiteList = boiteList;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public void setPhoto(String photo) {

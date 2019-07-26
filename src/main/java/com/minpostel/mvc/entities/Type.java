@@ -1,10 +1,8 @@
 package com.minpostel.mvc.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "type")
@@ -15,6 +13,13 @@ public class Type implements Serializable {
 	private Long typeID;
 
 	private String nom;
+
+	@OneToMany(mappedBy = "type")
+	private List<Nature> natureList;
+
+	@ManyToOne
+	@JoinColumn(name = "utilisateurID")
+	private Utilisateur utilisateur;
 
 
 	public Long getTypeID() {
@@ -31,5 +36,21 @@ public class Type implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public List<Nature> getNatureList() {
+		return natureList;
+	}
+
+	public void setNatureList(List<Nature> natureList) {
+		this.natureList = natureList;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 }

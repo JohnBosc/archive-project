@@ -1,12 +1,8 @@
 package com.minpostel.mvc.entities;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.Data;
 
@@ -18,7 +14,7 @@ public @Data class Utilisateur implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private Long utilID;
+	private Long utilisateurID;
 
 	private String nom;
 	private String prenom;
@@ -29,15 +25,39 @@ public @Data class Utilisateur implements Serializable {
 	private String poste;
 	private String adresse;
 	private String email;
-	private Profil profil;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Armoire> armoireList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Boite> boiteList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Dossier> dossierList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<ArchivePapier> archivePapierList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<MouvementDoc> mouvementDocList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Nature> natureList;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Type> typeList;
+
+	@ManyToOne
+	@JoinColumn(name = "profilID")
+	private Profile profile;
 
 
-	public Long getUtilID() {
-		return utilID;
+	public Long getUtilisateurID() {
+		return utilisateurID;
 	}
 
-	public void setUtilID(Long utilID) {
-		this.utilID = utilID;
+	public void setUtilisateurID(Long utilisateurID) {
+		this.utilisateurID = utilisateurID;
 	}
 
 	public String getNom() {
@@ -112,11 +132,67 @@ public @Data class Utilisateur implements Serializable {
 		this.email = email;
 	}
 
-	public Profil getProfil() {
-		return profil;
+	public List<Armoire> getArmoireList() {
+		return armoireList;
 	}
 
-	public void setProfil(Profil profil) {
-		this.profil = profil;
+	public void setArmoireList(List<Armoire> armoireList) {
+		this.armoireList = armoireList;
+	}
+
+	public List<Boite> getBoiteList() {
+		return boiteList;
+	}
+
+	public void setBoiteList(List<Boite> boiteList) {
+		this.boiteList = boiteList;
+	}
+
+	public List<Dossier> getDossierList() {
+		return dossierList;
+	}
+
+	public void setDossierList(List<Dossier> dossierList) {
+		this.dossierList = dossierList;
+	}
+
+	public List<ArchivePapier> getArchivePapierList() {
+		return archivePapierList;
+	}
+
+	public void setArchivePapierList(List<ArchivePapier> archivePapierList) {
+		this.archivePapierList = archivePapierList;
+	}
+
+	public List<MouvementDoc> getMouvementDocList() {
+		return mouvementDocList;
+	}
+
+	public void setMouvementDocList(List<MouvementDoc> mouvementDocList) {
+		this.mouvementDocList = mouvementDocList;
+	}
+
+	public List<Nature> getNatureList() {
+		return natureList;
+	}
+
+	public void setNatureList(List<Nature> natureList) {
+		this.natureList = natureList;
+	}
+
+	public List<Type> getTypeList() {
+		return typeList;
+	}
+
+	public void setTypeList(List<Type> typeList) {
+		this.typeList = typeList;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 }

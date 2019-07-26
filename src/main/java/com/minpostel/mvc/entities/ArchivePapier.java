@@ -1,8 +1,5 @@
 package com.minpostel.mvc.entities;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -15,7 +12,7 @@ public class ArchivePapier implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private Long archID;
+	private Long archivePapierID;
 
 	private int nbrePage;
 	private int nbreFeuille;
@@ -32,12 +29,26 @@ public class ArchivePapier implements Serializable {
 	private String motsCles;
 	private String photo;
 
-	public Long getArchID() {
-		return archID;
+	@ManyToOne
+	@JoinColumn(name = "utilisateurID")
+	private Utilisateur utilisateur;
+
+	@ManyToOne
+	@JoinColumn(name = "natureID")
+	private Nature nature;
+
+	@ManyToOne
+	@JoinColumn(name = "dptID")
+	private Departement departement;
+
+
+
+	public Long getArchivePapierID() {
+		return archivePapierID;
 	}
 
-	public void setArchID(Long archID) {
-		this.archID = archID;
+	public void setArchivePapierID(Long archivePapierID) {
+		this.archivePapierID = archivePapierID;
 	}
 
 	public int getNbrePage() {
@@ -146,6 +157,30 @@ public class ArchivePapier implements Serializable {
 
 	public String getPhoto() {
 		return photo;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Nature getNature() {
+		return nature;
+	}
+
+	public void setNature(Nature nature) {
+		this.nature = nature;
+	}
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 
 	public void setPhoto(String photo) {
